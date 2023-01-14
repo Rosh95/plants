@@ -28,14 +28,12 @@ function resetPhone() {
   textErrorOfPhone.style.display = 'none';
   inputPhone.value = '';
   hasPhoneError = false;
-  //  hasTouchedPhoneInput = false;
   inputPhone.classList.remove('pop_up__phone--error');
 }
 
 function resetName() {
   inputName.value = '';
   hasNameError = false;
-  //  hasTouchedNameInput = false;
   textErrorOfName.style.display = 'none';
   inputName.classList.remove('pop_up__name--error');
 }
@@ -48,34 +46,29 @@ popUp.addEventListener('click', function (event) {
   event.stopPropagation();
 });
 
-//Реализация валидации
+//Валидации
 const inputPhone = document.querySelector('.pop_up__phone');
 const inputName = document.querySelector('.pop_up__name');
 const textErrorOfPhone = document.querySelector('.pop_up__phone-error-text');
 const textErrorOfName = document.querySelector('.pop_up__name-error-text');
 
-//Переменные для 2-ух инпутов, которые отслеживают ошибку в форме и был ли затронут инпут
+//Переменные для 2-ух инпутов, которые отслеживают ошибку в форме
 let hasPhoneError = false;
-//let hasTouchedPhoneInput = false;
 let hasNameError = false;
-//let hasTouchedNameInput = false;
 
 //Переменная, которая отвечает за состояние disabled
 let isSubmitDisabled = true;
 
 //Проверка поля inputPhone
 function handlePhoneInput(event) {
-  //  hasTouchedPhoneInput = true;
   const number = event.target.value;
   const regexp = /^(8|\+7)\d{10}$/;
 
   if (!regexp.test(number)) {
-    console.log('phone is incorrect');
     inputPhone.classList.add('pop_up__phone--error');
     textErrorOfPhone.style.display = 'block';
     hasPhoneError = true;
   } else {
-    console.log('phone is correct');
     inputPhone.classList.remove('pop_up__phone--error');
     textErrorOfPhone.style.display = 'none';
     hasPhoneError = false;
@@ -84,17 +77,14 @@ function handlePhoneInput(event) {
 
 //Проверка поля inputName
 function handleNameInput(event) {
-  //  hasTouchedNameInput = true;
   const name = event.target.value;
   const regexp = /^\D{3,}$/;
 
   if (!regexp.test(name)) {
-    console.log('name  is incorrect');
     inputName.classList.add('pop_up__name--error');
     textErrorOfName.style.display = 'block';
     hasNameError = true;
   } else {
-    console.log('name is correct');
     inputName.classList.remove('pop_up__name--error');
     textErrorOfName.style.display = 'none';
     hasNameError = false;
@@ -104,11 +94,8 @@ function handleNameInput(event) {
 //Проверка одновременно двух полей, корректно ли они заполнены
 //Если оба поля заполнены верно - убрать disabled
 function checkValidateForm() {
-  //  const isPhoneInputCorrect = !hasPhoneError && hasTouchedPhoneInput;
   const isPhoneInputCorrect = !hasPhoneError;
   const isNameInputCorrect = !hasNameError;
-
-  //  const isNameInputCorrect = !hasNameError && hasTouchedNameInput;
 
   const isSubmitDisabled = !isPhoneInputCorrect || !isNameInputCorrect;
   submitButton.disabled = isSubmitDisabled;
@@ -137,7 +124,6 @@ function fetchTableData() {
     .then((response) => response.json())
     .then((arr) => {
       const filteredArr = filterArr(arr);
-      console.log(filteredArr);
       createTable(filteredArr);
     })
     .catch((error) => {
@@ -147,7 +133,6 @@ function fetchTableData() {
         const requestErrorTitle = document.querySelector('.request-error');
         requestErrorTitle.style.display = 'none';
       }, 2500);
-      console.error(error);
     })
     .finally(() => (preloader.style.display = 'none'));
 }

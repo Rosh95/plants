@@ -33,6 +33,7 @@ body {
   width: 110px;
   color: white;
   padding: 8px 20px;
+  border: none;
   background: #156963;
 }
 .header-top__button-form:hover {
